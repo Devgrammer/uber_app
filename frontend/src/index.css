@@ -1,0 +1,81 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: UberMoveLight;
+  font-style: normal;
+  font-weight: 200;
+  font-display: swap;
+  src: url("../public/font/UberMove-Light.woff2") format("woff2");
+}
+@font-face {
+  font-family: UberMoveRegular;
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/UberMove-Regular.woff2") format("woff2");
+}
+@font-face {
+  font-family: UberMoveMedium;
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("../public/font/UberMove-Medium.woff2") format("woff2");
+}
+@font-face {
+  font-family: UberMoveBold;
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url("../public/font/UberMove-Bold.woff2") format("woff2");
+}
+@font-face {
+  font-family: UberMoveTextLight;
+  font-style: normal;
+  font-weight: 200;
+  font-display: swap;
+  src: url("../public/font/UberMoveText-Light.woff2") format("woff2");
+}
+@font-face {
+  font-family: UberMoveTextRegular;
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../public/font/UberMoveText-Regular.woff2") format("woff2");
+}
+@font-face {
+  font-family: UberMoveTextMedium;
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("../public/font/UberMoveText-Medium.woff2") format("woff2");
+}
+@font-face {
+  font-family: UberMoveTextBold;
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url("../public/font/UberMoveText-Bold.woff2") format("woff2");
+}
+@theme {
+   --font-uml: "UberMoveLight", "sans-serif";
+   --font-umr: "UberMoveRegular", "sans-serif";
+   --font-umm: "UberMoveMedium", "sans-serif";
+   --font-umb: "UberMoveBold", "sans-serif";
+   --font-umtl: "UberMoveTextLight", "sans-serif";
+   --font-umtr: "UberMoveTextRegular", "sans-serif";
+   --font-umtm: "UberMoveTextMedium", "sans-serif";
+   --font-umtb: "UberMoveTextBold", "sans-serif";
+
+    --color-primary: #000000;
+    --color-secondary: #FFFFFF;
+}
+
+:root {
+  font-family: UberMove, Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
