@@ -1,13 +1,23 @@
 
 
 import './App.css'
+import Home from './pages/Home'
+import { Routes, Route } from "react-router";
+import UserSignup from './pages/UserSignup';
+import UserLogin from './pages/UserLogin';
+import CaptainLogin from './pages/CaptainLogin';
+import CaptainSignup from './pages/CaptainSignup';
 
 function App() { 
-  return (
-    <>
-    <div className="uber-frontend-main-container text-gray-700 text-5xl font-[600] font-umr">Hello Uber!</div>
-    </>
-  )
+  return ( 
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/user/login" element={<UserLogin />} />
+        <Route path="/user/signup" element={<UserSignup />} />
+        <Route path="/captain/login" element={<CaptainLogin />} />
+        <Route path="/captain/signup" element={<CaptainSignup />} />
+      </Routes>
+  );
 }
 
 export default App

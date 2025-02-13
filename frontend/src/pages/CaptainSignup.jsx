@@ -1,0 +1,159 @@
+import { useState } from "react";
+import { Link } from "react-router-dom";
+
+
+const CaptainSignup = () => {
+  const [captainSignupDetail, setcaptainSignupDetail] = useState({
+    fullName:{
+    firstName: "",
+    lastName: "",
+    },
+    email: "",
+    password: "",
+    cpassword: "",
+  });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(JSON.stringify(captainSignupDetail));
+
+    setcaptainSignupDetail({
+      fullName: {
+        firstName: "",
+        lastName: "",
+      },
+      email: "",
+      password: "",
+      cpassword: "",
+    });
+  };
+  return (
+    <div className="p-8 h-screen flex flex-col justify-between">
+      <div className="form-container">
+        <div className="brand-logo">
+          <img
+            src="/images/brand logo/uber_driver.svg"
+            alt="uber"
+            className="brand-icon w-24 ml-[-6px]"
+          />
+        </div>
+        <form
+          className="login-form font-umr space-y-6"
+          onSubmit={(e) => handleSubmit(e)}
+        >
+          <div className="input-container">
+            <p className="text-lg font-umm">First Name</p>
+            <input
+              value={captainSignupDetail?.firstName}
+              type="text"
+              placeholder="John"
+              className="captain-name w-full h-12 font-umm text-lg rounded-lg  bg-stone-200 focus:outline-2 outline-yellow-500 px-4"
+              required
+              onChange={(e) =>
+                setcaptainSignupDetail({
+                  ...captainSignupDetail,
+                  fullName: {
+                    firstName: e.target.value,
+                    lastName: captainSignupDetail.fullName.lastName,
+                  },
+                })
+              }
+            />
+          </div>
+          <div className="input-container">
+            <p className="text-lg font-umm">Last Name</p>
+            <input
+              value={captainSignupDetail?.lastName}
+              type="text"
+              placeholder="Doe"
+              className="captain-name w-full h-12 font-umm text-lg rounded-lg  bg-stone-200 focus:outline-2 outline-yellow-500 px-4"
+              required
+              onChange={(e) =>
+                setcaptainSignupDetail({
+                  ...captainSignupDetail,
+                  fullName: {
+                    firstName: captainSignupDetail.fullName.firstName,
+                    lastName: e.target.value,
+                  },
+                })
+              }
+            />
+          </div>
+          <div className="input-container">
+            <p className="text-lg font-umm">Email</p>
+            <input
+              value={captainSignupDetail?.email}
+              type="text"
+              placeholder="email@example.com"
+              className="captain-email w-full h-12 font-umm text-lg rounded-lg  bg-stone-200 focus:outline-2 outline-yellow-500 px-4"
+              required
+              onChange={(e) =>
+                setcaptainSignupDetail({
+                  ...captainSignupDetail,
+                  email: e.target.value,
+                })
+              }
+            />
+          </div>
+          <div className="input-container">
+            <p className="text-lg font-umm">Password</p>
+            <input
+              value={captainSignupDetail?.password}
+              type="password"
+              required
+              placeholder="***********"
+              className="captain-password w-full h-12 font-umm text-lg rounded-lg  bg-stone-200 focus:outline-2 outline-yellow-500 px-4"
+              onChange={(e) =>
+                setcaptainSignupDetail({
+                  ...captainSignupDetail,
+                  password: e.target.value,
+                })
+              }
+            />
+          </div>
+          <div className="input-container">
+            <p className="text-lg font-umm">Confirm Password</p>
+            <input
+              value={captainSignupDetail?.cpassword}
+              type="password"
+              required
+              placeholder="***********"
+              className="captain-password w-full h-12 font-umm text-lg rounded-lg  bg-stone-200 focus:outline-2 outline-yellow-500 px-4"
+              onChange={(e) =>
+                setcaptainSignupDetail({
+                  ...captainSignupDetail,
+                  cpassword: e.target.value,
+                })
+              }
+            />
+          </div>
+          <button
+            type="Submit"
+            className="form-submit w-full h-12 rounded-lg  font-umb text-lg outline-1 bg-primary text-secondary"
+          >
+            Signup
+          </button>
+          <p className="mt-[-0.5rem] font-umm text-md text-center">
+            Already have an account?{" "}
+            <Link to="/captain/login" className="text-blue-600">
+              Login.
+            </Link>
+          </p>
+        </form>
+        <p className="font-umr text-md text-gray-500 mt-4 leading-tight">
+          By proceeding, you consent to get calls, WhatsApp or SMS messages,
+          including by automated means, from Uber and its affiliates to the
+          number provided.
+        </p>
+      </div>
+      <Link
+        to="/user/signup"
+        className="sign-in flex items-center justify-center w-full h-12 rounded-lg  font-umb text-lg  bg-green-600 text-secondary"
+      >
+        Sign up as User
+      </Link>
+    </div>
+  ); 
+}
+
+export default CaptainSignup
