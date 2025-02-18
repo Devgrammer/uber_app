@@ -1,18 +1,35 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import axios from 'axios';
+import {UserDataContext} from '../context/UserContext'
 
 const UserSignup = () => {
 
-  const [userSignupDetail, setUserSignupDetail] = useState({fullName:{firstName:'', lastName:''}, email:'', password:'', cpassword:''});
 
-  const handleSubmit =(e)=>{
+
+  const [userSignupDetail, setUserSignupDetail] = useState({fullname:{firstname:'', lastname:''}, email:'', password:'', cpassword:''});
+   const {user, setUser} = useContext(UserDataContext);
+
+   const navigate = useNavigate();
+
+  const handleSubmit = async (e)=>{
     e.preventDefault();
-    console.log(JSON.stringify(userSignupDetail));
+    const newUser = userSignupDetail;
+    delete newUser.cpassword;
+
+    const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/users/register`, newUser);
+    if(response.status === 201){
+      const data = response.data;
+      setUser(data.user) 
+      localStorage.setItem('token', data.token)
+      navigate('/home');
+    }
+
 
     setUserSignupDetail({
-      fullName:{
-      firstName: "",
-      lastName: "",
+      fullname:{
+      firstname: "",
+      lastname: "",
       },
       email: "",
       password: "",
@@ -37,7 +54,7 @@ const UserSignup = () => {
           <div className="input-container">
             <p className="text-lg font-umm">First Name</p>
             <input
-              value={userSignupDetail?.fullName?.firstName}
+              value={userSignupDetail?.fullname?.firstname}
               type="text"
               placeholder="John"
               className="user-name w-full h-12 font-umm text-lg rounded-lg  bg-stone-200 focus:outline-2 outline-yellow-500 px-4"
@@ -45,9 +62,9 @@ const UserSignup = () => {
               onChange={(e) =>
                 setUserSignupDetail({
                   ...userSignupDetail,
-                  fullName: {
-                    firstName: e.target.value,
-                    lastName: userSignupDetail.fullName.lastName,
+                  fullname: {
+                    firstname: e.target.value,
+                    lastname: userSignupDetail.fullname.lastname,
                   },
                 })
               }
@@ -56,7 +73,7 @@ const UserSignup = () => {
           <div className="input-container">
             <p className="text-lg font-umm">Last Name</p>
             <input
-              value={userSignupDetail?.fullName?.lastName}
+              value={userSignupDetail?.fullname?.lastname}
               type="text"
               placeholder="Doe"
               className="user-name w-full h-12 font-umm text-lg rounded-lg  bg-stone-200 focus:outline-2 outline-yellow-500 px-4"
@@ -64,9 +81,9 @@ const UserSignup = () => {
               onChange={(e) =>
                 setUserSignupDetail({
                   ...userSignupDetail,
-                  fullName: {
-                    firstName: userSignupDetail?.fullName?.firstName,
-                    lastName: e.target.value,
+                  fullname: {
+                    firstname: userSignupDetail?.fullname?.firstname,
+                    lastname: e.target.value,
                   },
                 })
               }
@@ -124,7 +141,7 @@ const UserSignup = () => {
             type="Submit"
             className="form-submit w-full h-12 rounded-lg  font-umb text-lg outline-1 bg-primary text-secondary"
           >
-            Signup
+            Create an account
           </button>
           <p className="mt-[-0.5rem] font-umm text-md text-center">
             Already have an account?{" "}

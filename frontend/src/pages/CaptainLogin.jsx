@@ -7,8 +7,6 @@ const CaptainLogin = () => {
 
   const handleSubmit =(e)=>{
     e.preventDefault();
-    console.log(captainLoginCred.email, captainLoginCred.password);
-
     setcaptainLoginCred({email:'', password:''})
 
   }

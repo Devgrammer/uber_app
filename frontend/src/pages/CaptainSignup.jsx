@@ -15,8 +15,6 @@ const CaptainSignup = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(JSON.stringify(captainSignupDetail));
-
     setcaptainSignupDetail({
       fullName: {
         firstName: "",

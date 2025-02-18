@@ -14,7 +14,8 @@ const user = userModel.create({
         lastname
     },
      email,
-    password
+    password,
+    
 })
 
 return user;
