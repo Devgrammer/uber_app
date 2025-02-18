@@ -1,30 +1,51 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import axios from "axios";
+import { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { UserDataContext } from "../context/UserContext";
 
 
 const CaptainSignup = () => {
+  const navigate = useNavigate();
+  const {user, setUser} = useContext(UserDataContext);
   const [captainSignupDetail, setcaptainSignupDetail] = useState({
-    fullName:{
-    firstName: "",
-    lastName: "",
+    fullname:{
+    firstname: "",
+    lastname: "",
     },
     email: "",
     password: "",
     cpassword: "",
   });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    delete captainSignupDetail.cpassword;
+    captainSignupDetail.vehicle={
+      color:'red',
+      plate:'XDR',
+      capacity:"0",
+      vehicleType:'car'
+    }
+
+    const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/captains/register`, captainSignupDetail);
+
+    if(response.status === 201){
+      const data = response.data;
+      setUser(data.captain);
+      localStorage.setItem('token', data.token);
+      navigate('/home')
+    }
     setcaptainSignupDetail({
-      fullName: {
-        firstName: "",
-        lastName: "",
+      fullname: {
+        firstname: "",
+        lastname: "",
       },
       email: "",
       password: "",
       cpassword: "",
     });
   };
+
   return (
     <div className="p-8 h-screen flex flex-col justify-between">
       <div className="form-container">
@@ -42,7 +63,7 @@ const CaptainSignup = () => {
           <div className="input-container">
             <p className="text-lg font-umm">First Name</p>
             <input
-              value={captainSignupDetail?.firstName}
+              value={captainSignupDetail?.firstname}
               type="text"
               placeholder="John"
               className="captain-name w-full h-12 font-umm text-lg rounded-lg  bg-stone-200 focus:outline-2 outline-yellow-500 px-4"
@@ -50,9 +71,9 @@ const CaptainSignup = () => {
               onChange={(e) =>
                 setcaptainSignupDetail({
                   ...captainSignupDetail,
-                  fullName: {
-                    firstName: e.target.value,
-                    lastName: captainSignupDetail.fullName.lastName,
+                  fullname: {
+                    firstname: e.target.value,
+                    lastname: captainSignupDetail.fullname.lastname,
                   },
                 })
               }
@@ -61,7 +82,7 @@ const CaptainSignup = () => {
           <div className="input-container">
             <p className="text-lg font-umm">Last Name</p>
             <input
-              value={captainSignupDetail?.lastName}
+              value={captainSignupDetail?.lastname}
               type="text"
               placeholder="Doe"
               className="captain-name w-full h-12 font-umm text-lg rounded-lg  bg-stone-200 focus:outline-2 outline-yellow-500 px-4"
@@ -69,9 +90,9 @@ const CaptainSignup = () => {
               onChange={(e) =>
                 setcaptainSignupDetail({
                   ...captainSignupDetail,
-                  fullName: {
-                    firstName: captainSignupDetail.fullName.firstName,
-                    lastName: e.target.value,
+                  fullname: {
+                    firstname: captainSignupDetail.fullname.firstname,
+                    lastname: e.target.value,
                   },
                 })
               }
