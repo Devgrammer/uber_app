@@ -3,7 +3,6 @@ import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { UserDataContext } from "../context/UserContext";
 
-
 const CaptainSignup = () => {
   const navigate = useNavigate();
   const {user, setUser} = useContext(UserDataContext);
