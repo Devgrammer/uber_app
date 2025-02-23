@@ -7,24 +7,32 @@ const CaptainSignup = () => {
   const navigate = useNavigate();
   const {user, setUser} = useContext(UserDataContext);
   const [captainSignupDetail, setcaptainSignupDetail] = useState({
-    fullname:{
-    firstname: "",
-    lastname: "",
+    fullname: {
+      firstname: "",
+      lastname: "",
     },
     email: "",
     password: "",
     cpassword: "",
+    vehicle: {
+      color: "",
+      plate: "",
+      capacity: "",
+      vehicleType:"car",
+    },
   });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     delete captainSignupDetail.cpassword;
-    captainSignupDetail.vehicle={
-      color:'red',
-      plate:'XDR',
-      capacity:"0",
-      vehicleType:'car'
-    }
+    // captainSignupDetail.vehicle={
+    //   color:'red',
+    //   plate:'XDR',
+    //   capacity:"0",
+    //   vehicleType:'car'
+    // }
+
+    console.log('check', captainSignupDetail)
 
     const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/captains/register`, captainSignupDetail);
 
@@ -113,6 +121,97 @@ const CaptainSignup = () => {
               }
             />
           </div>
+          <div className="input-container-outer w-full">
+            <p className="text-lg font-umm">Vehicle Color</p>
+            <div className="division-wrapper w-full grid grid-cols-2  gap-2 md:gap-8">
+              <div className="input-container w-full">
+                <input
+                  value={captainSignupDetail?.vehicle?.color}
+                  type="text"
+                  placeholder="Vehicle Color"
+                  className="captain-email w-full  h-12 font-umm text-lg rounded-lg  bg-stone-200 focus:outline-2 outline-yellow-500 px-4"
+                  required
+                  onChange={(e) =>
+                    setcaptainSignupDetail({
+                      ...captainSignupDetail,
+                      vehicle: {
+                        ...captainSignupDetail.vehicle,
+                        color: e.target.value,
+                      },
+                    })
+                  }
+                />
+              </div>
+              <div className="input-container w-full ">
+                <input
+                  value={captainSignupDetail?.vehicle?.plate}
+                  type="text"
+                  placeholder="Vehicle Plate"
+                  className="captain-email w-full h-12 font-umm text-lg rounded-lg  bg-stone-200 focus:outline-2 outline-yellow-500 px-4"
+                  required
+                  autoCapitalize={"on"}
+                  maxLength={10}
+                  minLength={6}
+                  onChange={(e) =>
+                    setcaptainSignupDetail({
+                      ...captainSignupDetail,
+                      vehicle: {
+                        ...captainSignupDetail.vehicle,
+                        plate: e.target.value?.toUpperCase(),
+                      },
+                    })
+                  }
+                />
+              </div>
+              <div className="input-container w-full ">
+                <input
+                  value={captainSignupDetail?.vehicle?.capacity}
+                  type="number"
+                  placeholder="Vehicle Capacity"
+                  className="captain-email w-full h-12 font-umm text-lg rounded-lg  bg-stone-200 focus:outline-2 outline-yellow-500 px-4"
+                  required
+                  onChange={(e) =>
+                    setcaptainSignupDetail({
+                      ...captainSignupDetail,
+                      vehicle: {
+                        ...captainSignupDetail.vehicle,
+                        capacity: e.target.value,
+                      },
+                    })
+                  }
+                />
+              </div>
+              <div className="input-container w-full ">
+                <select
+                  className="captain-email w-full h-12 font-umm text-lg rounded-lg  bg-stone-200 focus:outline-2 outline-yellow-500 px-4"
+                  placeholder="Vehicle Type"
+                  required
+                  onChange={(e) =>
+                    setcaptainSignupDetail({
+                      ...captainSignupDetail,
+                      vehicle: {
+                        ...captainSignupDetail.vehicle,
+                        vehicleType: e.target.value,
+                      },
+                    })
+                  }
+                >
+                  <option  value=" ">
+                    Vehicle Type
+                  </option>
+                  <option value="car" name="Car">
+                    Car
+                  </option>
+                  <option value="motorcycle" name="MotorCycle">
+                    MotoCycle
+                  </option>
+                  <option value="auto" name="auto">
+                    Auto
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
           <div className="input-container">
             <p className="text-lg font-umm">Password</p>
             <input
@@ -145,6 +244,7 @@ const CaptainSignup = () => {
               }
             />
           </div>
+
           <button
             type="Submit"
             className="form-submit w-full h-12 rounded-lg  font-umb text-lg outline-1 bg-primary text-secondary"
