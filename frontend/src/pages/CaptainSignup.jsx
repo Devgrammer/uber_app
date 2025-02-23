@@ -122,7 +122,7 @@ const CaptainSignup = () => {
             />
           </div>
           <div className="input-container-outer w-full">
-            <p className="text-lg font-umm">Vehicle Color</p>
+            <p className="text-lg font-umm">Vehicle</p>
             <div className="division-wrapper w-full grid grid-cols-2  gap-2 md:gap-8">
               <div className="input-container w-full">
                 <input
