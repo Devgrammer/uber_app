@@ -10,6 +10,7 @@ export default defineConfig({
       input: 'index.html' // Ensure entry HTML is considered
     }
   },
+
   plugins: [react(), tailwindcss()],
   
 })
