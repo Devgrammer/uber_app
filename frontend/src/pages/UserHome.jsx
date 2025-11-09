@@ -14,7 +14,7 @@ import Bike from "/images/img/bike.jpeg";
 import WaitForRider from "../components/WaitingForDriver";
 import LookingForADriver from "../components/LookingForADriver";
 
-const Home = () => {
+const UserHome = () => {
   const [pickup, setPickup] = useState("");
   const [destination, setDestination] = useState("");
   const [panelOpen, setPanelOpen] = useState(false);
@@ -23,12 +23,14 @@ const Home = () => {
   const [vehiclePanelOpen, setVehiclePanelOpen] = useState(false);
   const [confirmRidePanelOpen, setConfirmRidePanelOpen] = useState(false);
   const [lookingDriverPanelOpen, setLookingDriverPanelOpen] = useState(false);
+  const [vehicleFound, setVehicleFound] = useState(false);
   const [waitingForDriverPanelOpen, setWaitingForDriverPanelOpen] =
     useState(false);
   const vehiclePanelRef = useRef(null);
   const confirmRidePanelRef = useRef(null);
   const lookingDriverPanelRef = useRef(null);
   const waitingForDriverPanelRef = useRef(null);
+  const vehicleFoundRef = useRef(null);
 
   //  const [coords, setCoords] = useState({
   //   lat:'',
@@ -141,6 +143,21 @@ const Home = () => {
     [confirmRidePanelOpen]
   );
 
+    useGSAP(
+      function () {
+        if (vehicleFound) {
+          gsap.to(vehicleFoundRef.current, {
+            translateY: "0%",
+            opacity: 1,
+          });
+        } else {
+          gsap.to(vehicleFoundRef.current, {
+            translateY: "100%",
+            opacity: 1,
+          });
+        }
+      },
+      [vehicleFound]);
   //console.log('a:', pickup, destination)
 
   return (
@@ -336,4 +353,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default UserHome;
