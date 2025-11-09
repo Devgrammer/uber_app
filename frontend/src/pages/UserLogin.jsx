@@ -19,7 +19,7 @@ const UserLogin = () => {
       const data = response.data;
       setUser(data.user);
       localStorage.setItem('token', data.token)
-      navigate('/home');
+      navigate('/user/home');
 
     }
 
@@ -27,7 +27,7 @@ const UserLogin = () => {
 
   }
   return (
-    <div className="p-8 h-screen flex flex-col justify-between">
+    <div className="flex flex-col justify-between h-screen p-8">
       <div className="form-container">
         <div className="brand-logo">
           <img
@@ -37,14 +37,14 @@ const UserLogin = () => {
             className="brand-icon w-32 ml-[-20px]"
           />
         </div>
-        <form className="login-form font-umr space-y-6" onSubmit={(e)=>handleSubmit(e)}>
+        <form className="space-y-6 login-form font-umr" onSubmit={(e)=>handleSubmit(e)}>
           <div className="input-container">
             <p className="text-lg font-umm">What is your email?</p>
             <input
               value={userLoginCred?.email}
               type="email"
               placeholder="email@example.com"
-              className="user-email w-full h-12 font-umm text-lg rounded-lg  bg-stone-200 focus:outline-2 outline-yellow-500 px-4"
+              className="w-full h-12 px-4 text-lg rounded-lg user-email font-umm bg-stone-200 focus:outline-2 outline-yellow-500"
               required
               onChange={(e) =>
                 setUserLoginCred({ ...userLoginCred, email: e.target.value })
@@ -58,13 +58,13 @@ const UserLogin = () => {
               type="password"
               required
               placeholder="***********"
-              className="user-password w-full h-12 font-umm text-lg rounded-lg  bg-stone-200 focus:outline-2 outline-yellow-500 px-4"
+              className="w-full h-12 px-4 text-lg rounded-lg user-password font-umm bg-stone-200 focus:outline-2 outline-yellow-500"
               onChange={(e) =>
                 setUserLoginCred({ ...userLoginCred, password: e.target.value })
               }
             />
           </div>
-          <button type='Submit' className="form-submit w-full h-12 rounded-lg  font-umb text-lg outline-1 bg-primary text-secondary">
+          <button type='Submit' className="w-full h-12 text-lg rounded-lg form-submit font-umb outline-1 bg-primary text-secondary">
             Login
           </button>
           <p className="mt-[-0.5rem] font-umm text-md text-center">
@@ -77,7 +77,7 @@ const UserLogin = () => {
       </div>
       <Link
         to="/captain/login"
-        className="sign-in flex items-center justify-center w-full h-12 rounded-lg  font-umb text-lg  bg-green-600 text-secondary"
+        className="flex items-center justify-center w-full h-12 text-lg bg-green-600 rounded-lg sign-in font-umb text-secondary"
       >
         Sign in as Captain
       </Link>
